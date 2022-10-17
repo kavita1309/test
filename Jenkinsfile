@@ -4,7 +4,7 @@ pipeline {
     
     environment {
         imageName = "test102"
-        registryCredentials = "nexus"
+        registryCredentials = "Nexus"
         registry = "3.237.17.215:8085/"
         dockerImage = ''
     }
@@ -34,27 +34,27 @@ pipeline {
     }
 
     // Uploading Docker images into Nexus Registry
-    //stage('Upload To Nexus') {
-     //steps{  
-       //  script {
-         //    docker.withRegistry( 'http://'+registry, registryCredentials ) {
-           //  dockerImage.push('latest')
-          //}
-        //}
-      //}
-    //} 
-
-    // Uploading Docker images into Nexus Registry
-    stage('Image upload to Nexus') {
-     steps{
+    stage('Upload To Nexus') {
+     steps{  
          script {
-             docker.withRegistry( 'http://'+registry, registryCredentials ) {
-              version = VersionNumber(versionNumberString: '1.${BUILDS_ALL_TIME}')
-             dockerImage.push(version)
-           }
+            docker.withRegistry( 'http://'+registry, registryCredentials ) {
+             dockerImage.push('latest')
+          }
         }
       }
-    }
+    } 
+
+    // Uploading Docker images into Nexus Registry
+    //stage('Image upload to Nexus') {
+     //steps{
+        // script {
+             //docker.withRegistry( 'http://'+registry, registryCredentials ) {
+              //version = VersionNumber(versionNumberString: '1.${BUILDS_ALL_TIME}')
+            // dockerImage.push(version)
+          // }
+       // }
+     // }
+   // }
     
     // Stopping Docker containers for cleaner Docker run
      
