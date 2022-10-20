@@ -50,6 +50,7 @@ pipeline {
         script {
              docker.withRegistry( 'http://'+registry, registryCredentials ) {
               version = VersionNumber(versionNumberString: '1.${BUILDS_ALL_TIME}')
+              version = VersionNumber(versionNumberString: '1.${BUILDS_ALL_TIME}')
              dockerImage.push(version)
            }
         }
